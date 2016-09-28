@@ -1,0 +1,18 @@
+outputfile                      example_output
+
+deflection_off                  0
+
+main_halo_on                    0
+field_off                       1
+
+pixelmaps_on                    1
+pixelmaps_input_file            example_planes.txt
+
+z_source                        3.0                  # maximum redshift
+
+redshifts                       0.5,1.0,1.5,2.0,2.5  # source plane redshifts,
+                                                     # no spaces allowed
+
+Omega_matter                    0.271
+Omega_lambda                    0.729
+hubble                          0.704
