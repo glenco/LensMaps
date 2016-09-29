@@ -16,3 +16,6 @@ redshifts                       0.5,1.0,1.5,2.0,2.5  # source plane redshifts,
 Omega_matter                    0.271                # \
 Omega_lambda                    0.729                # - should match input
 hubble                          0.704                # /
+
+# mapsize                         1024                 # override output size
+# gridsize                        2048                 # override grid size

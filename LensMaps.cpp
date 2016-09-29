@@ -62,21 +62,23 @@ int main(int argc, char** argv)
     << "mass map" << std::endl
     << "  size: " << mmap->getN() << std::endl;
     
-    std::size_t gridsize = std::pow(2, 1 + std::ceil(log2(mmap->getN())));
+    int mapsize;
+    if(!params.get("mapsize", mapsize))
+        mapsize = mmap->getN();
+    
+    std::cout
+    << "lens maps" << std::endl
+    << "  size: " << mapsize << std::endl;
+    
+    int gridsize;
+    if(!params.get("gridsize", gridsize))
+        gridsize = mapsize;
     
     std::cout
     << "grid" << std::endl
     << "  size: " << gridsize << std::endl
     << "  center: (" << mmap->getCenter()[0] << ", " << mmap->getCenter()[1] << ")" << std::endl
     << "  range: " << (mmap->getRangeRad()/pi*180) << " deg" << std::endl;
-    
-    // we can ask for an higher resolution map 
-    //int n = 512;
-    int n = mmap->getN();
-    
-    std::cout
-    << "lensing map" << std::endl
-    << "  resolution: " << n << "x" << n << std::endl;
     
     // loop through redshifts
     for(auto z: redshifts)
@@ -99,13 +101,13 @@ int main(int argc, char** argv)
         
         // write kappa map
         std::cout << "  kappa " << std::flush;
-        grid.writeFitsUniform(mmap->getCenter(), n, n, KAPPA, "!" + outfile);
+        grid.writeFitsUniform(mmap->getCenter(), mapsize, mapsize, KAPPA, "!" + outfile);
         std::cout << "done" << std::endl;
         
         // write gamma map
         std::cout << "  gamma " << std::flush;
-        grid.writeFitsUniform(mmap->getCenter(), n, n, GAMMA1, "!" + outfile);
-        grid.writeFitsUniform(mmap->getCenter(), n, n, GAMMA2, "!" + outfile);
+        grid.writeFitsUniform(mmap->getCenter(), mapsize, mapsize, GAMMA1, "!" + outfile);
+        grid.writeFitsUniform(mmap->getCenter(), mapsize, mapsize, GAMMA2, "!" + outfile);
         std::cout << "done" << std::endl;
     }
     
